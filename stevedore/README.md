@@ -1,4 +1,6 @@
 # thinking stevedore #
+    http://docs.openstack.org/developer/stevedore/
+
 Manage dynamic plugins for Python applications
 based on setuptools
 
