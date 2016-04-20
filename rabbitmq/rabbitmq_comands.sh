@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
+
 # rabbitmqctl
 rabbitmqctl list_queues
 rabbitmqctl list_exchanges
 rabbitmqctl list_bindings
 
 # rabbitmq-management plugin
-# »ùÓÚHTTPµÄRabbitMQ server¹ÜÀíºÍ¼à¿Ø¹¤¾ß
-# °üº¬»ùÓÚä¯ÀÀÆ÷µÄÓÃ»§½çÃæºÍÃüÁîĞĞ¹¤¾ßrabbitmqadmin.
+# åŸºäºHTTPçš„RabbitMQ serverç®¡ç†å’Œç›‘æ§å·¥å…·
+# åŒ…å«åŸºäºæµè§ˆå™¨çš„ç”¨æˆ·ç•Œé¢å’Œå‘½ä»¤è¡Œå·¥å…·rabbitmqadmin.
 rabbitmq-plugins enable rabbitmq_management
 #The following plugins have been enabled:
 #  mochiweb
@@ -18,54 +19,54 @@ rabbitmq-plugins enable rabbitmq_management
 #  rabbitmq_management
 #Plugin configuration has changed. Restart RabbitMQ for changes to take effect.
 systemctl restart rabbitmq-server.service
-# ·ÃÎÊ
+# è®¿é—®
 # http://server-name:15672/
 # http://server-name:15672/api #HTTP API
 # http://server-name:15672/cli #rabbitmqadmin
-# ¿ÉÒÔÊ¹ÓÃÄ¬ÈÏÓÃ»§Ãû guest / guest µÇÂ¼
-# ÌáÊ¾
-# Ä¬ÈÏguestÕË»§Ö»ÄÜ´ÓlocalhostµÇÂ¼£¬ĞèÏÈÌí¼ÓÓÃ»§ÓÃ¸³ÓèÏàÓ¦È¨ÏŞ (ÑéÖ¤´íÎó, ¿ÉÒÔÊ¹ÓÃguestÔ¶³ÌµÇÂ¼)
-# ¿ÉÍ¨¹ıÅäÖÃrabbitmq.config¸Ä±ärabbitmq-management pluginÄ¬ÈÏĞĞÎª
+# å¯ä»¥ä½¿ç”¨é»˜è®¤ç”¨æˆ·å guest / guest ç™»å½•
+# æç¤º
+# é»˜è®¤guestè´¦æˆ·åªèƒ½ä»localhostç™»å½•ï¼Œéœ€å…ˆæ·»åŠ ç”¨æˆ·ç”¨èµ‹äºˆç›¸åº”æƒé™ (éªŒè¯é”™è¯¯, å¯ä»¥ä½¿ç”¨guestè¿œç¨‹ç™»å½•)
+# å¯é€šè¿‡é…ç½®rabbitmq.configæ”¹å˜rabbitmq-management pluginé»˜è®¤è¡Œä¸º
 
-# ĞÂÔöÓÃ»§
+# æ–°å¢ç”¨æˆ·
 rabbitmqctl  add_user  james  passw0rd
-# É¾³ıÓÃ»§
+# åˆ é™¤ç”¨æˆ·
 rabbitmqctl  delete_user  james
-# ĞŞ¸ÄÃÜÂë
+# ä¿®æ”¹å¯†ç 
 rabbitmqctl  change_password  james  passw0rd
-# ²é¿´ÓÃ»§ÁĞ±í
-# guestÓÃ»§µÄÈ±Ê¡ÃÜÂëÊÇguest
+# æŸ¥çœ‹ç”¨æˆ·åˆ—è¡¨
+# guestç”¨æˆ·çš„ç¼ºçœå¯†ç æ˜¯guest
 rabbitmqctl  list_users
 
 wget http://server-name:15672/cli/rabbitmqadmin
 chmod a+x rabbitmqadmin
 ./rabbitmqadmin --help
 
-# ÓÃ»§½ÇÉ«
-# ·ÖÎªÎåÀà
-# (None)¡¢management¡¢policymaker¡¢monitoring¡¢administrator
-# ÉèÖÃÓÃ»§½ÇÉ«
+# ç”¨æˆ·è§’è‰²
+# åˆ†ä¸ºäº”ç±»
+# (None)ã€managementã€policymakerã€monitoringã€administrator
+# è®¾ç½®ç”¨æˆ·è§’è‰²
 # rabbitmqctl set_user_tags User Tag
 rabbitmqctl set_user_tags james administrator
-# Ò»´ÎÉèÖÃ¶à¸ö½ÇÉ«
+# ä¸€æ¬¡è®¾ç½®å¤šä¸ªè§’è‰²
 rabbitmqctl set_user_tags james administrator monitoring
-# ²Î¿¼£º
+# å‚è€ƒï¼š
 # http://www.rabbitmq.com/management.html
 
 
-# ÓÃ»§È¨ÏŞ
-# Ö¸ÓÃ»§¶Ôexchange£¬queueµÄ²Ù×÷È¨ÏŞ£¬°üÀ¨ÅäÖÃÈ¨ÏŞ£¬¶ÁĞ´È¨ÏŞ¡£
-# ÅäÖÃÈ¨ÏŞ»áÓ°Ïìµ½exchange£¬queueµÄÉùÃ÷ºÍÉ¾³ı¡£
-# ¶ÁĞ´È¨ÏŞÓ°Ïìµ½´ÓqueueÀïÈ¡ÏûÏ¢£¬Ïòexchange·¢ËÍÏûÏ¢ÒÔ¼°queueºÍexchangeµÄ°ó¶¨(bind)²Ù×÷¡£
-# ÉèÖÃÓÃ»§È¨ÏŞ
+# ç”¨æˆ·æƒé™
+# æŒ‡ç”¨æˆ·å¯¹exchangeï¼Œqueueçš„æ“ä½œæƒé™ï¼ŒåŒ…æ‹¬é…ç½®æƒé™ï¼Œè¯»å†™æƒé™ã€‚
+# é…ç½®æƒé™ä¼šå½±å“åˆ°exchangeï¼Œqueueçš„å£°æ˜å’Œåˆ é™¤ã€‚
+# è¯»å†™æƒé™å½±å“åˆ°ä»queueé‡Œå–æ¶ˆæ¯ï¼Œå‘exchangeå‘é€æ¶ˆæ¯ä»¥åŠqueueå’Œexchangeçš„ç»‘å®š(bind)æ“ä½œã€‚
+# è®¾ç½®ç”¨æˆ·æƒé™
 rabbitmqctl set_permissions -p VHostPath User ConfP WriteP ReadP
-# ²é¿´(Ö¸¶¨hostpath)ËùÓĞÓÃ»§µÄÈ¨ÏŞĞÅÏ¢
+# æŸ¥çœ‹(æŒ‡å®šhostpath)æ‰€æœ‰ç”¨æˆ·çš„æƒé™ä¿¡æ¯
 rabbitmqctl  list_permissions  [-p  VHostPath]
-# ²é¿´Ö¸¶¨ÓÃ»§µÄÈ¨ÏŞĞÅÏ¢
+# æŸ¥çœ‹æŒ‡å®šç”¨æˆ·çš„æƒé™ä¿¡æ¯
 rabbitmqctl  list_user_permissions  User
-# Çå³ıÓÃ»§µÄÈ¨ÏŞĞÅÏ¢
+# æ¸…é™¤ç”¨æˆ·çš„æƒé™ä¿¡æ¯
 rabbitmqctl  clear_permissions  [-p VHostPath]  User
-# ²Î¿¼
+# å‚è€ƒ
 # http://www.rabbitmq.com/access-control.html
 
 
