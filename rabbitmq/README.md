@@ -1,5 +1,4 @@
-
-** 安装**   
+** 安装**
 installation_centos7.sh   
 
 **几个关键词**     
