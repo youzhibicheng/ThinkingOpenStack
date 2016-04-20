@@ -1,3 +1,5 @@
+#-*-coding:utf-8-*-
+
 ========================
 Usage of oslo.messaging
 http://docs.openstack.org/developer/oslo.messaging/index.html
@@ -10,7 +12,7 @@ http://docs.openstack.org/developer/oslo.messaging/index.html
 
 示例
 1. install rabbitmq
-    refer to ThinkingMiddleware/rabbitmq/installation_centos7.sh
+    refer to installation_centos7.sh
 
 2. 相关命令语句
     # rabbitmqctl list_vhosts
