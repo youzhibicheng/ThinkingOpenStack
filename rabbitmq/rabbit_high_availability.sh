@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# http://www.rabbitmq.com/ha.html
 
-# Ãû´Ê½âÎö
-# mirror
-# HA ÊÇÔÚclusterÉÏµÄnodeÖ±½Ó×ö, »¹ÊÇĞèÒªÒıÈëĞÂµÄnode£¿£¿£¿ -> Ö»ÊÇÔÚclusterÖĞ
+
+# http://www.rabbitmq.com/ha.html   
+
+# åè¯è§£æ  
+# mirror   
+# HA æ˜¯åœ¨clusterä¸Šçš„nodeç›´æ¥åš, è¿˜æ˜¯éœ€è¦å¼•å…¥æ–°çš„nodeï¼Ÿï¼Ÿï¼Ÿ -> åªæ˜¯åœ¨clusterä¸­  
 
