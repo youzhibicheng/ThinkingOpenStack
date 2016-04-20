@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # http://www.rabbitmq.com/clustering.html
 
 # this create a rabbitmq sample cluster
@@ -18,26 +19,26 @@
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum -y install rabbitmq-server
 
-# 2.¶ÁÈ¡ÆäÖĞÒ»¸ö½ÚµãµÄcookie£¬²¢¸´ÖÆµ½ÆäËû½Úµã£¨½Úµã¼äÍ¨¹ıcookieÈ·¶¨Ïà»¥ÊÇ·ñ¿ÉÍ¨ĞÅ£©
-# Á½ÕßÖ®Ò»¾ù¿É£º
+# 2.è¯»å–å…¶ä¸­ä¸€ä¸ªèŠ‚ç‚¹çš„cookieï¼Œå¹¶å¤åˆ¶åˆ°å…¶ä»–èŠ‚ç‚¹ï¼ˆèŠ‚ç‚¹é—´é€šè¿‡cookieç¡®å®šç›¸äº’æ˜¯å¦å¯é€šä¿¡ï¼‰
+# ä¸¤è€…ä¹‹ä¸€å‡å¯ï¼š
 # sudo vim /var/lib/rabbitmq/.erlang.cookie
 # sudo vim $HOME/.erlang.cookie
-# ÔÚÃ¿Ì¨»úÆ÷ÉÏµÄ/etc/hostsÖĞÌí¼Ó
+# åœ¨æ¯å°æœºå™¨ä¸Šçš„/etc/hostsä¸­æ·»åŠ 
 # vim /etc/hosts
 # 192.168.56.101 server
 # 192.168.56.102 cluster1
 # 192.168.56.103 cluster2
 
-# 3.Öğ¸öÆô¶¯½Úµã
+# 3.é€ä¸ªå¯åŠ¨èŠ‚ç‚¹
 systemctl enable rabbitmq-server.service
 systemctl start rabbitmq-server.service
 sudo rabbitmq-plugins enable rabbitmq_management
 
-# 4.²é¿´¸÷½ÚµãÖĞµÄRabbitMQ brokers
+# 4.æŸ¥çœ‹å„èŠ‚ç‚¹ä¸­çš„RabbitMQ brokers
 sudo rabbitmqctl cluster_status
 
-# 5.½¨¼¯Èº
-# ·Ö±ğÔÚcluster1¡¢cluster2 ÉÏÖ´ĞĞ
+# 5.å»ºé›†ç¾¤
+# åˆ†åˆ«åœ¨cluster1ã€cluster2 ä¸Šæ‰§è¡Œ
 sudo rabbitmqctl stop_app
 sudo rabbitmqctl join_cluster --ram rabbit@server
 sudo rabbitmqctl start_app
@@ -46,20 +47,20 @@ sudo rabbitmqctl join_cluster rabbit@server
 sudo rabbitmqctl start_app
 
 #####################################################
-RabbitMQ cluster ¹ÜÀí
+RabbitMQ cluster ç®¡ç†
 #####################################################
-# 1.²é¿´¼¯Èº×´Ì¬
-# ¿É·Ö±ğÔÚ¼¯ÈºÖĞ¸÷¸ö½ÚµãÖ´ĞĞ
+# 1.æŸ¥çœ‹é›†ç¾¤çŠ¶æ€
+# å¯åˆ†åˆ«åœ¨é›†ç¾¤ä¸­å„ä¸ªèŠ‚ç‚¹æ‰§è¡Œ
 sudo rabbitmqctl cluster_status
 
-# 2.¸ü¸Ä½ÚµãÀàĞÍ£¨ÄÚ´æĞÍ»ò´ÅÅÌĞÍ£©
+# 2.æ›´æ”¹èŠ‚ç‚¹ç±»å‹ï¼ˆå†…å­˜å‹æˆ–ç£ç›˜å‹ï¼‰
 sudo rabbitmqctl stop_app
 sudo rabbitmqctl change_cluster_node_type disc
 sudo rabbitmqctl change_cluster_node_type ram
 sudo rabbitmqctl start_app
 
-# 3.ÖØÆôclusterÖĞµÄ½Úµã
-# Í£Ö¹Ä³¸ö½Úµã»òÕß½ÚµãdownµôÊ£Óà½Úµã²»ÊÜÓ°Ïì
+# 3.é‡å¯clusterä¸­çš„èŠ‚ç‚¹
+# åœæ­¢æŸä¸ªèŠ‚ç‚¹æˆ–è€…èŠ‚ç‚¹downæ‰å‰©ä½™èŠ‚ç‚¹ä¸å—å½±å“
 # cluster1
 sudo rabbitmqctl stop
 # server
