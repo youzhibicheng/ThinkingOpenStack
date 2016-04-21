@@ -20,10 +20,34 @@ class TestEndpoint(object):
     def test(self, ctx, arg):
         return arg
 
+service_opts = [
+    cfg.IntOpt('periodic_interval',
+               default=40,
+               help=_('Seconds between running periodic tasks')),
+    cfg.IntOpt('api_workers',
+               help=_('Number of separate API worker processes for service. '
+                      'If not specified, the default is equal to the number '
+                      'of CPUs available for best performance.')),
+    cfg.IntOpt('rpc_workers',
+               default=1,
+               help=_('Number of RPC worker processes for service')),
+    cfg.IntOpt('rpc_state_report_workers',
+               default=1,
+               help=_('Number of RPC worker processes dedicated to state '
+                      'reports queue')),
+    cfg.IntOpt('periodic_fuzzy_delay',
+               default=5,
+               help=_('Range of seconds to randomly delay when starting the '
+                      'periodic task scheduler to reduce stampeding. '
+                      '(Disable by setting to 0)')),
+]
+CONF = cfg.CONF
+CONF.register_opts(service_opts)
+
 # 从cfg对象中，读取transport_url,rpc_backend和control_exchange信息构
 # 造Transport对象，其中rpc_backend和control_exchange的默认值分别为：
 # ’rabbit’和’openstack’。
-transport = oslo_messaging.get_transport(cfg.CONF)
+transport = oslo_messaging.get_transport(CONF)
 
 # 在构造RPC-server的target时，需要topic和server参数，exchange参数可选。
 target = oslo_messaging.Target(topic='test', server='server1')
