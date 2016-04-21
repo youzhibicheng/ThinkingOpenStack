@@ -13,7 +13,7 @@ import rpc_amqp
 import rpc
 
 rabbit_params = {
-    'hostname':'192.168.56.101',
+    'hostname':'localhost',
     'port':5672,
     'userid': 'guest',
     'password': 'guest',

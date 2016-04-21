@@ -48,6 +48,7 @@ class FibonacciRpcClient(object):
                                    # message需为字符串
                                    body=str(n))
 
+        # how to do with this code???
         while self.response is None:
             self.connection.process_data_events()
 

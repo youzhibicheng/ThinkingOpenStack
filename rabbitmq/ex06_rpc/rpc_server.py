@@ -39,6 +39,7 @@ def on_request(ch, method, props, body):
                      routing_key=props.reply_to,
                      properties=pika.BasicProperties(correlation_id=props.correlation_id),
                      body=str(response))
+    # what is the method???
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
@@ -49,7 +50,7 @@ channel.basic_qos(prefetch_count=1)
 # 设置consumeer参数，即从哪个queue获取消息使用哪个函数进行处理，是否对消息进行确认
 channel.basic_consume(on_request, queue='rpc_queue')
 
-print " [x] Awaiting ex07_openstack requests"
+print " [x] Awaiting ex06_rpc requests"
 
 # 开始接收并处理消息
 channel.start_consuming()

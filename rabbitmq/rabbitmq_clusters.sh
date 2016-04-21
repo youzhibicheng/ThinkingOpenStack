@@ -54,6 +54,10 @@ RabbitMQ cluster 管理
 sudo rabbitmqctl cluster_status
 
 # 2.更改节点类型（内存型或磁盘型）
+# A node can be a disk node or a RAM node
+# In most cases you want all your nodes to be disk nodes;
+# RAM nodes are a special case that can be used to improve the performance clusters with high queue, exchange, or binding churn.
+# When in doubt, use disk nodes only
 sudo rabbitmqctl stop_app
 sudo rabbitmqctl change_cluster_node_type disc
 sudo rabbitmqctl change_cluster_node_type ram

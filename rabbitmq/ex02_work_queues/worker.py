@@ -29,7 +29,9 @@ def callback(ch, method, properties, body):
 # 若存在多个consumer每个consumer的负载可能不同，有些处理的快有些处理的慢
 # RabbitMQ并不管这些，只是简单的以round-robin的方式分配message
 # 这可能造成某些consumer积压很多任务处理不完而一些consumer长期处于饥饿状态
-# 可以使用prefetch_count=1的basic_qos方法可告知RabbitMQ只有在consumer处理并确认了上一个message后才分配新的message给他
+# 可以使用prefetch_count=1的basic_qos方法可告知RabbitMQ
+# 只有在consumer处理并确认了上一个message后
+# 才分配新的message给他
 # 否则分给另一个空闲的consumer
 channel.basic_qos(prefetch_count=1)
 

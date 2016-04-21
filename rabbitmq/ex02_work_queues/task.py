@@ -23,6 +23,7 @@ message = ' '.join(sys.argv[1:]) or "Hello World!"
 # 况且RabbitMQ不会对每条message做fsync动作
 # 可通过publisher confirms实现更强壮的持久性保证
 # delivery_mode=2, # make message persistent
+# when exchange='', how to see it in rabbitmq???
 channel.basic_publish(exchange='',
                       routing_key='task_queue',
                       body=message,

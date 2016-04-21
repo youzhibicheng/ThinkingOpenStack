@@ -4,7 +4,7 @@ import pika
 import sys
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='192.168.31.113'))
+        host='localhost'))
 channel = connection.channel()
 
 # 声明一个名为topic_logs的topic类型的exchange
@@ -32,7 +32,6 @@ for severity in severities:
                        routing_key=severity)
 
 print ' [*] Waiting for logs. To exit press CTRL+C'
-
 
 def callback(ch, method, properties, body):
     print " [x] %r:%r" % (method.routing_key, body,)

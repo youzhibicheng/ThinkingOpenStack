@@ -2,6 +2,7 @@
 
 
 # http://www.rabbitmq.com/ha.html   
+# http://www.cnblogs.com/sammyliu/p/4730517.html
 
 # 名词解析  
 # mirror   

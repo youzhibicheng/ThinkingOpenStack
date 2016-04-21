@@ -5,7 +5,7 @@ import pika
 # 建立到达RabbitMQ Server的connection
 # 此处RabbitMQ Server位于本机-localhost
 connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='192.168.31.113'))
+        host='localhost'))
 channel = connection.channel()
 
 # 声明queue，确认要从中接收message的queue
